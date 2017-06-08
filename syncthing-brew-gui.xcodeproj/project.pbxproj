@@ -1,0 +1,298 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		476BDEC71EE9EDEA00F036C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */; };
+		476BDEC91EE9EDEA00F036C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BDEC81EE9EDEA00F036C3 /* ViewController.swift */; };
+		476BDECB1EE9EDEA00F036C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 476BDECA1EE9EDEA00F036C3 /* Assets.xcassets */; };
+		476BDECE1EE9EDEA00F036C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 476BDECC1EE9EDEA00F036C3 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		476BDEC31EE9EDEA00F036C3 /* syncthing-brew-gui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "syncthing-brew-gui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		476BDEC81EE9EDEA00F036C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		476BDECA1EE9EDEA00F036C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		476BDECD1EE9EDEA00F036C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		476BDECF1EE9EDEA00F036C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		476BDEC01EE9EDEA00F036C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		476BDEBA1EE9EDEA00F036C3 = {
+			isa = PBXGroup;
+			children = (
+				476BDEC51EE9EDEA00F036C3 /* syncthing-brew-gui */,
+				476BDEC41EE9EDEA00F036C3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		476BDEC41EE9EDEA00F036C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				476BDEC31EE9EDEA00F036C3 /* syncthing-brew-gui.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		476BDEC51EE9EDEA00F036C3 /* syncthing-brew-gui */ = {
+			isa = PBXGroup;
+			children = (
+				476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */,
+				476BDEC81EE9EDEA00F036C3 /* ViewController.swift */,
+				476BDECA1EE9EDEA00F036C3 /* Assets.xcassets */,
+				476BDECC1EE9EDEA00F036C3 /* Main.storyboard */,
+				476BDECF1EE9EDEA00F036C3 /* Info.plist */,
+			);
+			path = "syncthing-brew-gui";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		476BDEC21EE9EDEA00F036C3 /* syncthing-brew-gui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 476BDED21EE9EDEA00F036C3 /* Build configuration list for PBXNativeTarget "syncthing-brew-gui" */;
+			buildPhases = (
+				476BDEBF1EE9EDEA00F036C3 /* Sources */,
+				476BDEC01EE9EDEA00F036C3 /* Frameworks */,
+				476BDEC11EE9EDEA00F036C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "syncthing-brew-gui";
+			productName = "syncthing-brew-gui";
+			productReference = 476BDEC31EE9EDEA00F036C3 /* syncthing-brew-gui.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		476BDEBB1EE9EDEA00F036C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Jonas Höchst";
+				TargetAttributes = {
+					476BDEC21EE9EDEA00F036C3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = S2M4R3QVMR;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 476BDEBE1EE9EDEA00F036C3 /* Build configuration list for PBXProject "syncthing-brew-gui" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 476BDEBA1EE9EDEA00F036C3;
+			productRefGroup = 476BDEC41EE9EDEA00F036C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				476BDEC21EE9EDEA00F036C3 /* syncthing-brew-gui */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		476BDEC11EE9EDEA00F036C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				476BDECB1EE9EDEA00F036C3 /* Assets.xcassets in Resources */,
+				476BDECE1EE9EDEA00F036C3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		476BDEBF1EE9EDEA00F036C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				476BDEC91EE9EDEA00F036C3 /* ViewController.swift in Sources */,
+				476BDEC71EE9EDEA00F036C3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		476BDECC1EE9EDEA00F036C3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				476BDECD1EE9EDEA00F036C3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		476BDED01EE9EDEA00F036C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		476BDED11EE9EDEA00F036C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		476BDED31EE9EDEA00F036C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S2M4R3QVMR;
+				INFOPLIST_FILE = "syncthing-brew-gui/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.jonashoechst.syncthing-brew-gui";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		476BDED41EE9EDEA00F036C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S2M4R3QVMR;
+				INFOPLIST_FILE = "syncthing-brew-gui/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.jonashoechst.syncthing-brew-gui";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		476BDEBE1EE9EDEA00F036C3 /* Build configuration list for PBXProject "syncthing-brew-gui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				476BDED01EE9EDEA00F036C3 /* Debug */,
+				476BDED11EE9EDEA00F036C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		476BDED21EE9EDEA00F036C3 /* Build configuration list for PBXNativeTarget "syncthing-brew-gui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				476BDED31EE9EDEA00F036C3 /* Debug */,
+				476BDED41EE9EDEA00F036C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 476BDEBB1EE9EDEA00F036C3 /* Project object */;
+}
