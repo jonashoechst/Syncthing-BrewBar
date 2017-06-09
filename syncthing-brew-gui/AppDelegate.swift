@@ -13,9 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
 // MARK: - menu items
     let barItem = NSStatusBar.system().statusItem(withLength: -2)
     let statusItem = NSMenuItem(title: "Syncthing: status unknown", action: nil, keyEquivalent: "")
-    let startItem = NSMenuItem(title: "Start Syncthing", action: #selector(AppDelegate.startSyncthing), keyEquivalent: "s")
-    let stopItem = NSMenuItem(title: "Stop Syncthing", action: #selector(AppDelegate.stopSyncthing), keyEquivalent: "s")
-    let restartItem = NSMenuItem(title: "Restart Syncthing", action: #selector(AppDelegate.restartSyncthing), keyEquivalent: "")
+    let startItem = NSMenuItem(title: "Start Syncthing", action: #selector(AppDelegate.startSyncthing), keyEquivalent: "")
+    let stopItem = NSMenuItem(title: "Stop Syncthing", action: #selector(AppDelegate.stopSyncthing), keyEquivalent: "")
+    let restartItem = NSMenuItem(title: "Restart Syncthing", action: #selector(AppDelegate.restartSyncthing), keyEquivalent: "R")
     let browserItem = NSMenuItem(title: "Open WebUI", action: #selector(AppDelegate.openBrowser(sender:)), keyEquivalent: "n")
     let folderOffset = 6
     
@@ -39,11 +39,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         menu.addItem(browserItem)
         menu.addItem(NSMenuItem.separator())
         
+        // Folder Items will go here
+        
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.shared().terminate(_:)), keyEquivalent: "q"))
-        barItem.menu = menu
         
-        restartItem.isHidden = true
+        statusItem.isEnabled = false
+        menu.autoenablesItems = false
+        barItem.menu = menu
 
         updateUIStatus()
     }
@@ -101,15 +104,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     func updateUIStatus() {
         let running = getSyncthingStatus()
         
-        if running == "started" {
+        if running == "started" || running == "error" {
             startItem.isHidden = true
             stopItem.isHidden = false
 
             restartItem.isEnabled = true
             browserItem.isEnabled = true
             reloadConfigValues()
-        } else {
+            
+        } else if running == "stopped" {
             startItem.isHidden = false
+            stopItem.isHidden = true
+            
+            restartItem.isEnabled = false
+            browserItem.isEnabled = false
+            wipeConfigValues()
+        } else {
+            startItem.isHidden = true
             stopItem.isHidden = true
             
             restartItem.isEnabled = false
