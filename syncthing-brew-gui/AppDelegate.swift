@@ -11,17 +11,18 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
-    
+
+// MARK: - menu items
     let barItem = NSStatusBar.system().statusItem(withLength: -2)
     let statusItem = NSMenuItem(title: "Syncthing: status unknown", action: nil, keyEquivalent: "")
-    let startItem = NSMenuItem(title: "Start Syncthing", action: #selector(AppDelegate.startSyncthing), keyEquivalent: "")
-    let stopItem = NSMenuItem(title: "Stop Syncthing", action: #selector(AppDelegate.stopSyncthing), keyEquivalent: "")
+    let startItem = NSMenuItem(title: "Start Syncthing", action: #selector(AppDelegate.startSyncthing), keyEquivalent: "s")
+    let stopItem = NSMenuItem(title: "Stop Syncthing", action: #selector(AppDelegate.stopSyncthing), keyEquivalent: "s")
     let restartItem = NSMenuItem(title: "Restart Syncthing", action: #selector(AppDelegate.restartSyncthing), keyEquivalent: "")
-    let browserItem = NSMenuItem(title: "Open WebUI", action: #selector(AppDelegate.openBrowser(sender:)), keyEquivalent: "")
-    
-    let config_xml = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]+"/Syncthing/config.xml"
+    let browserItem = NSMenuItem(title: "Open WebUI", action: #selector(AppDelegate.openBrowser(sender:)), keyEquivalent: "n")
     let folderOffset = 6
     
+// MARK: - syncthing variables and locations
+    let config_xml = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]+"/Syncthing/config.xml"
     var syncthingStatus = "undefined"
     var guiConfiguration: Dictionary<String, String> = [:]
     var xmlLocation: Array<String> = []
@@ -50,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         updateUIStatus()
     }
     
-// MARK: brew service handling
+// MARK: - brew service handling
     func execCmd(launchPath: String, arguments: [String]) -> String {
         let pipe = Pipe()
         
@@ -93,7 +94,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             if line.hasPrefix("syncthing") {
                 var statusArr = line.characters.split{$0 == " "}.map(String.init)
                 self.syncthingStatus = statusArr[1]
-                print("Syncthing: " + self.syncthingStatus)
             }
         }
         
@@ -141,7 +141,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         parser.parse()
     }
     
-// MARK: XMLParserDelegate implementation
+// MARK: - XMLParserDelegate implementation
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         let menu = barItem.menu!
         
@@ -172,7 +172,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         
     }
 
-// MARK: Helper functions
+// MARK: - Helper functions OS interaction
     func openFolder(sender: NSMenuItem) {
         NSWorkspace.shared().selectFile(nil, inFileViewerRootedAtPath: sender.title)
     }
