@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		476BDEC71EE9EDEA00F036C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */; };
-		476BDEC91EE9EDEA00F036C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BDEC81EE9EDEA00F036C3 /* ViewController.swift */; };
-		476BDECB1EE9EDEA00F036C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 476BDECA1EE9EDEA00F036C3 /* Assets.xcassets */; };
-		476BDECE1EE9EDEA00F036C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 476BDECC1EE9EDEA00F036C3 /* Main.storyboard */; };
+		47D533D01EEAFA6600241631 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47D533CF1EEAFA6600241631 /* Images.xcassets */; };
+		47D533D21EEAFFAB00241631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D533D11EEAFFAB00241631 /* ViewController.swift */; };
+		47D533D81EEB31F800241631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47D533D71EEB31F800241631 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		476BDEC31EE9EDEA00F036C3 /* syncthing-brew-gui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "syncthing-brew-gui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		476BDEC81EE9EDEA00F036C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		476BDECA1EE9EDEA00F036C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		476BDECD1EE9EDEA00F036C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		476BDECF1EE9EDEA00F036C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47D533CF1EEAFA6600241631 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		47D533D11EEAFFAB00241631 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		47D533D71EEB31F800241631 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +52,10 @@
 		476BDEC51EE9EDEA00F036C3 /* syncthing-brew-gui */ = {
 			isa = PBXGroup;
 			children = (
+				47D533CF1EEAFA6600241631 /* Images.xcassets */,
+				47D533D71EEB31F800241631 /* Main.storyboard */,
 				476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */,
-				476BDEC81EE9EDEA00F036C3 /* ViewController.swift */,
-				476BDECA1EE9EDEA00F036C3 /* Assets.xcassets */,
-				476BDECC1EE9EDEA00F036C3 /* Main.storyboard */,
+				47D533D11EEAFFAB00241631 /* ViewController.swift */,
 				476BDECF1EE9EDEA00F036C3 /* Info.plist */,
 			);
 			path = "syncthing-brew-gui";
@@ -121,8 +121,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				476BDECB1EE9EDEA00F036C3 /* Assets.xcassets in Resources */,
-				476BDECE1EE9EDEA00F036C3 /* Main.storyboard in Resources */,
+				47D533D01EEAFA6600241631 /* Images.xcassets in Resources */,
+				47D533D81EEB31F800241631 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,23 +133,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				476BDEC91EE9EDEA00F036C3 /* ViewController.swift in Sources */,
+				47D533D21EEAFFAB00241631 /* ViewController.swift in Sources */,
 				476BDEC71EE9EDEA00F036C3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		476BDECC1EE9EDEA00F036C3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				476BDECD1EE9EDEA00F036C3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		476BDED01EE9EDEA00F036C3 /* Debug */ = {
@@ -291,6 +280,7 @@
 				476BDED41EE9EDEA00F036C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
