@@ -8,8 +8,6 @@
 
 import Cocoa
 
-
-@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
 
 // MARK: - menu items
@@ -28,7 +26,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     var xmlLocation: Array<String> = []
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSApplication.shared().windows.last!.close()
         
         if let button = barItem.button {
             button.image = NSImage(named: "baricon")

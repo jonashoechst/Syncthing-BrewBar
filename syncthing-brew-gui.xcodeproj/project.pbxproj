@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		476BDEC71EE9EDEA00F036C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */; };
 		47D533D01EEAFA6600241631 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47D533CF1EEAFA6600241631 /* Images.xcassets */; };
-		47D533D21EEAFFAB00241631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D533D11EEAFFAB00241631 /* ViewController.swift */; };
-		47D533D81EEB31F800241631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47D533D71EEB31F800241631 /* Main.storyboard */; };
+		47D533FA1EEB38E000241631 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D533F91EEB38E000241631 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,8 +17,7 @@
 		476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		476BDECF1EE9EDEA00F036C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47D533CF1EEAFA6600241631 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		47D533D11EEAFFAB00241631 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		47D533D71EEB31F800241631 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		47D533F91EEB38E000241631 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +50,9 @@
 		476BDEC51EE9EDEA00F036C3 /* syncthing-brew-gui */ = {
 			isa = PBXGroup;
 			children = (
+				47D533F91EEB38E000241631 /* main.swift */,
 				47D533CF1EEAFA6600241631 /* Images.xcassets */,
-				47D533D71EEB31F800241631 /* Main.storyboard */,
 				476BDEC61EE9EDEA00F036C3 /* AppDelegate.swift */,
-				47D533D11EEAFFAB00241631 /* ViewController.swift */,
 				476BDECF1EE9EDEA00F036C3 /* Info.plist */,
 			);
 			path = "syncthing-brew-gui";
@@ -122,7 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47D533D01EEAFA6600241631 /* Images.xcassets in Resources */,
-				47D533D81EEB31F800241631 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47D533D21EEAFFAB00241631 /* ViewController.swift in Sources */,
+				47D533FA1EEB38E000241631 /* main.swift in Sources */,
 				476BDEC71EE9EDEA00F036C3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
