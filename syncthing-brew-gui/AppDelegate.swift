@@ -106,12 +106,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             stopItem.isHidden = false
 
             restartItem.isEnabled = true
+            browserItem.isEnabled = true
             reloadConfigValues()
         } else {
             startItem.isHidden = false
             stopItem.isHidden = true
             
             restartItem.isEnabled = false
+            browserItem.isEnabled = false
             wipeConfigValues()
         }
         
