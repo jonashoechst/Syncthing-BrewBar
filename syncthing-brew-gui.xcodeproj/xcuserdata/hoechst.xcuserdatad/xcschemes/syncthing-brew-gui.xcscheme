@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "476BDEC21EE9EDEA00F036C3"
-               BuildableName = "syncthing-brew-gui.app"
-               BlueprintName = "syncthing-brew-gui"
+               BuildableName = "Syncthing BrewBar.app"
+               BlueprintName = "Syncthing BrewBar"
                ReferencedContainer = "container:syncthing-brew-gui.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "476BDEC21EE9EDEA00F036C3"
-            BuildableName = "syncthing-brew-gui.app"
-            BlueprintName = "syncthing-brew-gui"
+            BuildableName = "Syncthing BrewBar.app"
+            BlueprintName = "Syncthing BrewBar"
             ReferencedContainer = "container:syncthing-brew-gui.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "476BDEC21EE9EDEA00F036C3"
-            BuildableName = "syncthing-brew-gui.app"
-            BlueprintName = "syncthing-brew-gui"
+            BuildableName = "Syncthing BrewBar.app"
+            BlueprintName = "Syncthing BrewBar"
             ReferencedContainer = "container:syncthing-brew-gui.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "476BDEC21EE9EDEA00F036C3"
-            BuildableName = "syncthing-brew-gui.app"
-            BlueprintName = "syncthing-brew-gui"
+            BuildableName = "Syncthing BrewBar.app"
+            BlueprintName = "Syncthing BrewBar"
             ReferencedContainer = "container:syncthing-brew-gui.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
