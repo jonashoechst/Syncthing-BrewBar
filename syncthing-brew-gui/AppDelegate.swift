@@ -97,7 +97,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     func restartSyncthing() {
         updateUIStatus("restarting...")
         execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "restart", "syncthing"])
-
     }
     
     func getSyncthingStatus() -> String {
@@ -151,12 +150,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         for _ in folderOffset..<(menu.numberOfItems - 2) {
             menu.removeItem(at: folderOffset)
         }
-        
     }
     
     func reloadConfigValues() {
         wipeConfigValues()
-        
         
         let config_url = URL(fileURLWithPath: config_xml)
         let parser = XMLParser(contentsOf:(config_url))!
@@ -165,10 +162,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         
         let menu = barItem.menu!
         menu.insertItem(NSMenuItem.separator(), at: menu.numberOfItems - 1)
-        
-        for item in menu.items {
-            print(item.title)
-        }
     }
     
 // MARK: - XMLParserDelegate implementation
