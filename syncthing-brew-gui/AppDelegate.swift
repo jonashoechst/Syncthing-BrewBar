@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     let stopItem = NSMenuItem(title: "Stop Syncthing", action: #selector(AppDelegate.stopSyncthing), keyEquivalent: "")
     let restartItem = NSMenuItem(title: "Restart Syncthing", action: #selector(AppDelegate.restartSyncthing), keyEquivalent: "R")
     let browserItem = NSMenuItem(title: "Open WebUI", action: #selector(AppDelegate.openBrowser(sender:)), keyEquivalent: "n")
-    let folderOffset = 6
+    var folderOffset = 0
     
 // MARK: - syncthing variables and locations
     let config_xml = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]+"/Syncthing/config.xml"
@@ -37,9 +37,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         menu.addItem(stopItem)
         menu.addItem(restartItem)
         menu.addItem(browserItem)
-        menu.addItem(NSMenuItem.separator())
         
         // Folder Items will go here
+        folderOffset = menu.numberOfItems
         
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.shared().terminate(_:)), keyEquivalent: "q"))
@@ -48,7 +48,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         menu.autoenablesItems = false
         barItem.menu = menu
 
-        updateUIStatus()
+        // Set unknown status and trigger status update
+        updateUIStatus("...")
+        DispatchQueue.global(qos: .background).async {
+            let running = self.getSyncthingStatus()
+            self.updateUIStatus(running)
+        }
     }
     
 // MARK: - brew service handling
@@ -67,25 +72,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         return output!
     }
     
+    func execAsyncAndUpdate(launchPath: String, arguments: [String]) {
+        DispatchQueue.global(qos: .background).async {
+            let execString = self.execCmd(launchPath: launchPath, arguments: arguments)
+            print(execString)
+            
+            let running = self.getSyncthingStatus()
+            DispatchQueue.main.async {
+                self.updateUIStatus(running)
+            }
+        }
+    }
+    
     func startSyncthing() {
-        let execString = execCmd(launchPath: "/usr/local/bin/brew", arguments: ["services", "start", "syncthing"])
-        print(execString)
-        
-        updateUIStatus()
+        updateUIStatus("starting...")
+        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "start", "syncthing"])
     }
     
     func stopSyncthing() {
-        let execString = execCmd(launchPath: "/usr/local/bin/brew", arguments: ["services", "stop", "syncthing"])
-        print(execString)
-        
-        updateUIStatus()
+        updateUIStatus("stopping...")
+        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "stop", "syncthing"])
     }
     
     func restartSyncthing() {
-        let execString = execCmd(launchPath: "/usr/local/bin/brew", arguments: ["services", "restart", "syncthing"])
-        print(execString)
-        
-        updateUIStatus()
+        updateUIStatus("restarting...")
+        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "restart", "syncthing"])
+
     }
     
     func getSyncthingStatus() -> String {
@@ -101,8 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     }
 
 // MARK: - Menu - status config
-    func updateUIStatus() {
-        let running = getSyncthingStatus()
+    func updateUIStatus(_ running: String) {
         
         if running == "started" || running == "error" {
             startItem.isHidden = true
@@ -120,6 +131,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             browserItem.isEnabled = false
             wipeConfigValues()
         } else {
+
             startItem.isHidden = true
             stopItem.isHidden = true
             
@@ -128,7 +140,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             wipeConfigValues()
         }
         
-        statusItem.title = "Syncthing: "+running
+        statusItem.title = "Syncthing: " + running
     }
     
 // MARK: Menu - folder configuration
@@ -136,8 +148,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         let menu = barItem.menu!
         
         // wipe current menu
-        for _ in 0..<(menu.numberOfItems - (folderOffset + 2)) {
-            barItem.menu!.removeItem(at: folderOffset)
+        for _ in folderOffset..<(menu.numberOfItems - 2) {
+            menu.removeItem(at: folderOffset)
         }
         
     }
@@ -145,10 +157,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     func reloadConfigValues() {
         wipeConfigValues()
         
+        
         let config_url = URL(fileURLWithPath: config_xml)
         let parser = XMLParser(contentsOf:(config_url))!
         parser.delegate = self
         parser.parse()
+        
+        let menu = barItem.menu!
+        menu.insertItem(NSMenuItem.separator(), at: menu.numberOfItems - 1)
+        
+        for item in menu.items {
+            print(item.title)
+        }
     }
     
 // MARK: - XMLParserDelegate implementation
@@ -156,9 +176,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         let menu = barItem.menu!
         
         if xmlLocation == ["configuration"] && elementName == "folder" {
-            let pos = menu.numberOfItems - (folderOffset + 2)
+            let pos = menu.numberOfItems - folderOffset - 1
             let folderItem = NSMenuItem(title: attributeDict["path"]!, action: #selector(AppDelegate.openFolder(sender:)), keyEquivalent: String(pos))
-            barItem.menu!.insertItem(folderItem, at: folderOffset + pos)
+            menu.insertItem(folderItem, at: folderOffset + pos)
         }
         
         if xmlLocation == ["configuration"] && elementName == "gui" {
