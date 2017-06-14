@@ -10,6 +10,15 @@ This tool is supposed to control an existing brew syncthing installation. It's r
 
 The app uses the *brew services* control commands to start and stop syncthing and parses the syncthing configuration file for easy WebUI and folder access. 
 
+![Syncthing BrewBar simple start/stop demo](start-stop-syncthing-brew-bar.gif)
+
+### Features:
+
+- display **status**
+- **start** / **stop** / **restart** the syncthing service
+- open the **WebUI** in the default browser
+- **open** syncthing'd folders **in Finder**
+
 ## Requirements
 
 - [brew](https://brew.sh) (who doesn't use brew anymore?)
@@ -18,7 +27,8 @@ The app uses the *brew services* control commands to start and stop syncthing an
 ## Caveats / not implemented yet
 Note: pull requests are very welcome!
 
-- error handling (e.g. if syncthing isn't installed)
-- asynchronous shell command execution
+- error handling, e.g.:
+	- syncthing isn't installed
+	- alternative config paths; currently hardcoded to `~/Library/Application\ Support/Syncthing/config.xml`
 - code refactoring
 - tests
