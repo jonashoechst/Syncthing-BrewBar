@@ -27,9 +27,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        if let button = barItem.button {
-            button.image = NSImage(named: "baricon")
-        }
+        let barButton = barItem.button!
+        barButton.image = NSImage(named: "syncthing-bar")
         
         let menu = NSMenu()
         menu.addItem(statusItem)
@@ -46,14 +45,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         
         statusItem.isEnabled = false
         menu.autoenablesItems = false
+//        barItem.action = #selector(updateUIAsync)
         barItem.menu = menu
 
         // Set unknown status and trigger status update
         updateUIStatus("...")
-        DispatchQueue.global(qos: .background).async {
-            let running = self.getSyncthingStatus()
-            self.updateUIStatus(running)
-        }
+        updateUIAsync(sender: self)
     }
     
 // MARK: - brew service handling
@@ -140,6 +137,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         }
         
         statusItem.title = "Syncthing: " + running
+    }
+    
+    func updateUIAsync(sender: AnyObject) {
+        DispatchQueue.global(qos: .background).async {
+            let running = self.getSyncthingStatus()
+            self.updateUIStatus(running)
+            print("Updated async")
+        }
     }
     
 // MARK: Menu - folder configuration
