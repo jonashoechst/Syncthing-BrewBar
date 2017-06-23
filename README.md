@@ -12,6 +12,15 @@ The app uses the *brew services* control commands to start and stop syncthing an
 
 ![Syncthing BrewBar simple start/stop demo](start-stop-syncthing-brew-bar.gif)
 
+## Installation
+
+Prefered way via brew cask: 
+
+```brew cask install jonashoechst/hoechst/syncthing-brewbar```
+
+... or download latest release from the [Github releases page](https://github.com/jonashoechst/Syncthing-BrewBar/releases) and drag & drop to /Applications/
+
+
 ### Features:
 
 - display **status**
