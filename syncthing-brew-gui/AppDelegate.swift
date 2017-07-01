@@ -117,6 +117,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
 
             restartItem.isEnabled = true
             browserItem.isEnabled = true
+            
+            barItem.button!.appearsDisabled = false
             reloadConfigValues()
             
         } else if running == "stopped" {
@@ -125,6 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             
             restartItem.isEnabled = false
             browserItem.isEnabled = false
+            barItem.button!.appearsDisabled = true
             wipeConfigValues()
         } else {
 
