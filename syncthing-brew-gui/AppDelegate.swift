@@ -72,7 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
     func execAsyncAndUpdate(launchPath: String, arguments: [String]) {
         DispatchQueue.global(qos: .background).async {
             let execString = self.execCmd(launchPath: launchPath, arguments: arguments)
-            print(execString)
+            NSLog("%@", execString)
             
             let running = self.getSyncthingStatus()
             DispatchQueue.main.async {
@@ -146,7 +146,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         DispatchQueue.global(qos: .background).async {
             let running = self.getSyncthingStatus()
             self.updateUIStatus(running)
-            print("Updated async")
         }
     }
     
