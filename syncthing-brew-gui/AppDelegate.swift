@@ -212,8 +212,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         } else {
             urlstring += "http://"
         }
-        urlstring += guiConfiguration["user"]! + "@"
-        urlstring += guiConfiguration["address"]!
+        
+        if let user = guiConfiguration["user"] {
+            urlstring += user + "@"
+        }
+        
+        if let address = guiConfiguration["address"] {
+            urlstring += address
+        } else {
+            urlstring += "localhost:8384"
+        }
         
         let url = URL(string: urlstring)
         NSWorkspace.shared().open(url!)
