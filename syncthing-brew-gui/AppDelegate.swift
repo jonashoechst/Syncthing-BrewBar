@@ -51,6 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         // Set unknown status and trigger status update
         updateUIStatus("...")
         updateUIStatusAsync(sender: self)
+
+        // create timer, that updates the status every 1 minute
+        Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(updateUIStatusAsync), userInfo: nil, repeats: true)
     }
     
 // MARK: - brew service handling
@@ -75,9 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
             NSLog("%@", execString)
             
             let running = self.getSyncthingStatus()
-            DispatchQueue.main.async {
-                self.updateUIStatus(running)
-            }
+            self.updateUIStatus(running)
         }
     }
     
