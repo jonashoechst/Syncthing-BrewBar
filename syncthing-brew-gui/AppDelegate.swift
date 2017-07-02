@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDelegate {
 
 // MARK: - menu items
     let barItem = NSStatusBar.system().statusItem(withLength: -2)
@@ -45,12 +45,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         
         statusItem.isEnabled = false
         menu.autoenablesItems = false
-//        barItem.action = #selector(updateUIAsync)
         barItem.menu = menu
+        menu.delegate = self
 
         // Set unknown status and trigger status update
         updateUIStatus("...")
-        updateUIAsync(sender: self)
+        updateUIStatusAsync(sender: self)
     }
     
 // MARK: - brew service handling
@@ -119,7 +119,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             browserItem.isEnabled = true
             
             barItem.button!.appearsDisabled = false
-            reloadConfigValues()
             
         } else if running == "stopped" {
             startItem.isHidden = false
@@ -128,7 +127,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             restartItem.isEnabled = false
             browserItem.isEnabled = false
             barItem.button!.appearsDisabled = true
-            wipeConfigValues()
         } else {
 
             startItem.isHidden = true
@@ -136,18 +134,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
             
             restartItem.isEnabled = false
             browserItem.isEnabled = false
-            wipeConfigValues()
         }
         
         statusItem.title = "Syncthing: " + running
     }
     
-    func updateUIAsync(sender: AnyObject) {
+    func updateUIStatusAsync(sender: AnyObject) {
         DispatchQueue.global(qos: .background).async {
             let running = self.getSyncthingStatus()
             self.updateUIStatus(running)
         }
     }
+
     
 // MARK: Menu - folder configuration
     func wipeConfigValues() {
@@ -159,9 +157,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         }
     }
     
-    func reloadConfigValues() {
-        wipeConfigValues()
-        
+    func loadConfigValues() {
         let config_url = URL(fileURLWithPath: config_xml)
         let parser = XMLParser(contentsOf:(config_url))!
         parser.delegate = self
@@ -171,6 +167,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         menu.insertItem(NSMenuItem.separator(), at: menu.numberOfItems - 1)
     }
     
+// MARK: - NSMenuDelegate implementation
+    func menuWillOpen(_ menu: NSMenu) {
+        self.loadConfigValues()
+        updateUIStatusAsync(sender: self)
+    }
+
+    func menuDidClose(_ menu: NSMenu) {
+        self.wipeConfigValues()
+    }
+
 // MARK: - XMLParserDelegate implementation
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         let menu = barItem.menu!
@@ -187,6 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate {
         
         xmlLocation.append(elementName)
     }
+
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         xmlLocation.removeLast()
     }
