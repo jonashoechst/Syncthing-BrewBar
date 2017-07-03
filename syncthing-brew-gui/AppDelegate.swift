@@ -10,6 +10,8 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDelegate {
 
+    static let shellPath = getUserPath()
+
 // MARK: - menu items
     let barItem = NSStatusBar.system().statusItem(withLength: -2)
     let statusItem = NSMenuItem(title: "Syncthing: status unknown", action: nil, keyEquivalent: "")
@@ -61,6 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         let pipe = Pipe()
         
         let task = Process()
+        var env = ProcessInfo.processInfo.environment
+        env["PATH"] = AppDelegate.shellPath
+        task.environment = env
         task.launchPath = launchPath
         task.arguments = arguments
         task.standardOutput = pipe
@@ -84,21 +89,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     
     func startSyncthing() {
         updateUIStatus("starting...")
-        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "start", "syncthing"])
+        execAsyncAndUpdate(launchPath: "/usr/bin/env", arguments: ["brew", "services", "start", "syncthing"])
     }
     
     func stopSyncthing() {
         updateUIStatus("stopping...")
-        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "stop", "syncthing"])
+        execAsyncAndUpdate(launchPath: "/usr/bin/env", arguments: ["brew", "services", "stop", "syncthing"])
     }
     
     func restartSyncthing() {
         updateUIStatus("restarting...")
-        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "restart", "syncthing"])
+        execAsyncAndUpdate(launchPath: "/usr/bin/env", arguments: ["brew", "services", "restart", "syncthing"])
     }
     
     func getSyncthingStatus() -> String {
-        let execString = execCmd(launchPath: "/usr/local/bin/brew", arguments: ["services", "list"])
+        let execString = execCmd(launchPath: "/usr/bin/env", arguments: ["brew", "services", "list"])
         execString.enumerateLines { line, _ in
             if line.hasPrefix("syncthing") {
                 var statusArr = line.characters.split{$0 == " "}.map(String.init)
@@ -235,6 +240,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         
         let url = URL(string: urlstring)
         NSWorkspace.shared().open(url!)
+    }
+
+    class func getUserPath() -> String {
+        // inspired by: https://stackoverflow.com/questions/41535451/how-to-access-the-terminals-path-variable-from-within-my-mac-app-it-seems-to
+        let shell = Process()
+        let shellPipe = Pipe()
+        shell.standardOutput = shellPipe
+        shell.standardError = shellPipe
+
+        shell.launchPath = "/usr/bin/env"
+        shell.arguments = ["/bin/bash","-c","eval $(/usr/libexec/path_helper -s) ; echo $PATH"]
+
+        shell.launch()
+        shell.waitUntilExit()
+
+        let outputData = shellPipe.fileHandleForReading.readDataToEndOfFile()
+        var output: String = NSString(data: outputData, encoding: String.Encoding.utf8.rawValue) as! String
+        output = output.replacingOccurrences(of: "\n", with: "", options: .literal, range: nil)
+        return output
     }
 }
 
