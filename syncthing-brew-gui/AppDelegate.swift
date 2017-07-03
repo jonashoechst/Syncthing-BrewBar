@@ -57,6 +57,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     }
     
 // MARK: - brew service handling
+    let brewPath = "/usr/local/bin/brew"
+
     func execCmd(launchPath: String, arguments: [String]) -> String {
         let pipe = Pipe()
         
@@ -84,21 +86,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     
     func startSyncthing() {
         updateUIStatus("starting...")
-        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "start", "syncthing"])
+        execAsyncAndUpdate(launchPath: brewPath, arguments: ["services", "start", "syncthing"])
     }
     
     func stopSyncthing() {
         updateUIStatus("stopping...")
-        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "stop", "syncthing"])
+        execAsyncAndUpdate(launchPath: brewPath, arguments: ["services", "stop", "syncthing"])
     }
     
     func restartSyncthing() {
         updateUIStatus("restarting...")
-        execAsyncAndUpdate(launchPath: "/usr/local/bin/brew", arguments: ["services", "restart", "syncthing"])
+        execAsyncAndUpdate(launchPath: brewPath, arguments: ["services", "restart", "syncthing"])
     }
     
     func getSyncthingStatus() -> String {
-        let execString = execCmd(launchPath: "/usr/local/bin/brew", arguments: ["services", "list"])
+        let execString = execCmd(launchPath: brewPath, arguments: ["services", "list"])
         execString.enumerateLines { line, _ in
             if line.hasPrefix("syncthing") {
                 var statusArr = line.characters.split{$0 == " "}.map(String.init)
