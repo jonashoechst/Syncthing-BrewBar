@@ -244,21 +244,45 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
 
     class func getUserPath() -> String {
         // inspired by: https://stackoverflow.com/questions/41535451/how-to-access-the-terminals-path-variable-from-within-my-mac-app-it-seems-to
-        let shell = Process()
-        let shellPipe = Pipe()
-        shell.standardOutput = shellPipe
-        shell.standardError = shellPipe
 
-        shell.launchPath = "/usr/bin/env"
-        shell.arguments = ["/bin/bash","-c","eval $(/usr/libexec/path_helper -s) ; echo $PATH"]
+        // resolve standard system PATH with path_helper
+        let pathHelperPipe = Pipe()
+        let pathHelper = Process()
+        pathHelper.standardOutput = pathHelperPipe
+        pathHelper.standardError = pathHelperPipe
+        pathHelper.launchPath = "/usr/bin/env"
+        pathHelper.arguments = ["bash","-c","eval $(/usr/libexec/path_helper -s); echo $PATH"]
+        pathHelper.launch()
+        pathHelper.waitUntilExit()
 
-        shell.launch()
-        shell.waitUntilExit()
+        let pathHelperShellData = pathHelperPipe.fileHandleForReading.readDataToEndOfFile()
+        var pathHelperPath = String.init(data: pathHelperShellData, encoding: String.Encoding.utf8)!
+        pathHelperPath = pathHelperPath.replacingOccurrences(of: "\n", with: "", options: .literal, range: nil)
 
-        let outputData = shellPipe.fileHandleForReading.readDataToEndOfFile()
-        var output: String = NSString(data: outputData, encoding: String.Encoding.utf8.rawValue) as! String
-        output = output.replacingOccurrences(of: "\n", with: "", options: .literal, range: nil)
-        return output
+        NSLog("pathHelperPath: PATH=\"%@\"", pathHelperPath)
+
+        // set PATH in environment
+        var env = ProcessInfo.processInfo.environment
+        env["PATH"] = pathHelperPath + ":" + env["PATH"]!
+
+        // resolve user PATH by launching a 2nd shell with set system PATH.
+        let userShellPipe = Pipe()
+        let userShell = Process()
+        userShell.environment = env
+        userShell.launchPath = "/usr/bin/env"
+        userShell.arguments = ["bash", "-c", "echo $PATH"]
+        userShell.standardOutput = userShellPipe
+        userShell.standardError = userShellPipe
+        userShell.launch()
+        userShell.waitUntilExit()
+
+        let userShellData = userShellPipe.fileHandleForReading.readDataToEndOfFile()
+        var userShellPath = String.init(data: userShellData, encoding: String.Encoding.utf8)!
+        userShellPath = userShellPath.replacingOccurrences(of: "\n", with: "", options: .literal, range: nil)
+
+        NSLog("userShell: PATH=\"%@\"", userShellPath)
+
+        return userShellPath
     }
 }
 
