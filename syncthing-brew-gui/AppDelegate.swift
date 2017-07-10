@@ -59,14 +59,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     }
     
 // MARK: - brew service handling
-    func execCmd(launchPath: String, arguments: [String]) -> String {
+    func execCmd(_ arguments: [String]) -> String {
         let pipe = Pipe()
         
         let task = Process()
         var env = ProcessInfo.processInfo.environment
         env["PATH"] = AppDelegate.shellPath
         task.environment = env
-        task.launchPath = launchPath
+        task.launchPath = "/usr/bin/env"
         task.arguments = arguments
         task.standardOutput = pipe
         task.launch()
@@ -77,9 +77,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         return output!
     }
     
-    func execAsyncAndUpdate(launchPath: String, arguments: [String]) {
+    func execAsyncAndUpdate(_ arguments: [String]) {
         DispatchQueue.global(qos: .background).async {
-            let execString = self.execCmd(launchPath: launchPath, arguments: arguments)
+            let execString = self.execCmd(arguments)
             NSLog("%@", execString)
             
             let running = self.getSyncthingStatus()
@@ -89,21 +89,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     
     func startSyncthing() {
         updateUIStatus("starting...")
-        execAsyncAndUpdate(launchPath: "/usr/bin/env", arguments: ["brew", "services", "start", "syncthing"])
+        execAsyncAndUpdate(["brew", "services", "start", "syncthing"])
     }
     
     func stopSyncthing() {
         updateUIStatus("stopping...")
-        execAsyncAndUpdate(launchPath: "/usr/bin/env", arguments: ["brew", "services", "stop", "syncthing"])
+        execAsyncAndUpdate(["brew", "services", "stop", "syncthing"])
     }
     
     func restartSyncthing() {
         updateUIStatus("restarting...")
-        execAsyncAndUpdate(launchPath: "/usr/bin/env", arguments: ["brew", "services", "restart", "syncthing"])
+        execAsyncAndUpdate(["brew", "services", "restart", "syncthing"])
     }
     
     func getSyncthingStatus() -> String {
-        let execString = execCmd(launchPath: "/usr/bin/env", arguments: ["brew", "services", "list"])
+        let execString = execCmd(["brew", "services", "list"])
         execString.enumerateLines { line, _ in
             if line.hasPrefix("syncthing") {
                 var statusArr = line.characters.split{$0 == " "}.map(String.init)
