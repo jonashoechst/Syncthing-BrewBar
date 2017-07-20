@@ -260,7 +260,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         let pathHelperError = pathHelperErrorPipe.fileHandleForReading.readDataToEndOfFile()
         if (pathHelperError.count >= 1) { // if the output is more than a new line.
             let pathHelperErrorString = String.init(data: pathHelperError, encoding: String.Encoding.utf8)!
-            NSLog("Errors loading ~/.bashrc: \n%@", pathHelperErrorString)
+            NSLog("Errors loading ~/.bashrc; continuing: \n%@", pathHelperErrorString)
         }
         
         let pathHelperData = pathHelperPipe.fileHandleForReading.readDataToEndOfFile()
@@ -268,7 +268,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         pathHelperPath = pathHelperPath.replacingOccurrences(of: "\n", with: "", options: .literal, range: nil)
 
         let userShellPath = pathHelperPath + ":" + ProcessInfo.processInfo.environment["PATH"]!
-        NSLog("userShell: PATH=\"%@\"", userShellPath)
 
         return userShellPath
     }
