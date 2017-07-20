@@ -140,6 +140,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
             
             restartItem.isEnabled = false
             browserItem.isEnabled = false
+            barItem.button!.appearsDisabled = true
         }
         
         statusItem.title = "Syncthing: " + running
