@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     static let shellPath = getUserPath()
 
 // MARK: - menu items
-    let barItem = NSStatusBar.system().statusItem(withLength: -2)
+    let barItem = NSStatusBar.system.statusItem(withLength: -2)
     let statusItem = NSMenuItem(title: "Syncthing: status unknown", action: nil, keyEquivalent: "")
     let startItem = NSMenuItem(title: "Start Syncthing", action: #selector(AppDelegate.startSyncthing), keyEquivalent: "")
     let stopItem = NSMenuItem(title: "Stop Syncthing", action: #selector(AppDelegate.stopSyncthing), keyEquivalent: "")
@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         let barButton = barItem.button!
-        barButton.image = NSImage(named: "syncthing-bar")
+        barButton.image = NSImage(named: NSImage.Name(rawValue: "syncthing-bar"))
         
         let menu = NSMenu()
         menu.addItem(statusItem)
@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         folderOffset = menu.numberOfItems
         
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.shared().terminate(_:)), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.shared.terminate(_:)), keyEquivalent: "q"))
         
         statusItem.isEnabled = false
         menu.autoenablesItems = false
@@ -87,17 +87,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         }
     }
     
-    func startSyncthing() {
+    @objc func startSyncthing() {
         updateUIStatus("starting...")
         execAsyncAndUpdate(["brew", "services", "start", "syncthing"])
     }
     
-    func stopSyncthing() {
+    @objc func stopSyncthing() {
         updateUIStatus("stopping...")
         execAsyncAndUpdate(["brew", "services", "stop", "syncthing"])
     }
     
-    func restartSyncthing() {
+    @objc func restartSyncthing() {
         updateUIStatus("restarting...")
         execAsyncAndUpdate(["brew", "services", "restart", "syncthing"])
     }
@@ -146,7 +146,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         statusItem.title = "Syncthing: " + running
     }
     
-    func updateUIStatusAsync(sender: AnyObject) {
+    @objc func updateUIStatusAsync(sender: AnyObject) {
         DispatchQueue.global(qos: .background).async {
             let running = self.getSyncthingStatus()
             DispatchQueue.main.sync {
@@ -219,11 +219,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     }
 
 // MARK: - Helper functions OS interaction
-    func openFolder(sender: NSMenuItem) {
-        NSWorkspace.shared().selectFile(nil, inFileViewerRootedAtPath: sender.title)
+    @objc func openFolder(sender: NSMenuItem) {
+        NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: sender.title)
     }
     
-    func openBrowser(sender: NSMenuItem) {
+    @objc func openBrowser(sender: NSMenuItem) {
         var urlstring = ""
         if guiConfiguration["tls"] == "true" {
             urlstring += "https://"
@@ -242,7 +242,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         }
         
         let url = URL(string: urlstring)
-        NSWorkspace.shared().open(url!)
+        NSWorkspace.shared.open(url!)
     }
 
     class func getUserPath() -> String {
