@@ -149,7 +149,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     func updateUIStatusAsync(sender: AnyObject) {
         DispatchQueue.global(qos: .background).async {
             let running = self.getSyncthingStatus()
-            self.updateUIStatus(running)
+            DispatchQueue.main.sync {
+                self.updateUIStatus(running)
+            }
         }
     }
 
