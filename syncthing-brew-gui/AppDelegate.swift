@@ -82,8 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
             let execString = self.execCmd(arguments)
             NSLog("%@", execString)
             
-            let running = self.getSyncthingStatus()
-            self.updateUIStatus(running)
+            self.updateUIStatusAsync(sender: self)
         }
     }
     
@@ -106,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
         let execString = execCmd(["brew", "services", "list"])
         execString.enumerateLines { line, _ in
             if line.hasPrefix("syncthing") {
-                var statusArr = line.characters.split{$0 == " "}.map(String.init)
+                let statusArr = line.split{$0 == " "}.map(String.init)
                 self.syncthingStatus = statusArr[1]
             }
         }
