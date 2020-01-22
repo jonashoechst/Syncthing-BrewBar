@@ -1,8 +1,14 @@
+**DEPRECATED**: I recommend to use the official [Syncthing for macOS](https://github.com/syncthing/syncthing-macos) wrapper application, which comes along with a nice and even more advanced status bar. 
+
 # Syncthing BrewBar
 
-**Syncthing BrewBar** is a macOS status bar application for brew syncthing installations.
+**Syncthing BrewBar** <strike>is</strike> was a macOS status bar application for brew syncthing installations.
 
-Just like my predecessor ([syncthing-bar](https://github.com/m0ppers/syncthing-bar)) i missed some nice syncthing statusbar tool to easily start and stop out beloved syncing tool, so i just wrote my own. 
+Just like my predecessor ([syncthing-bar](https://github.com/m0ppers/syncthing-bar)) i missed some nice syncthing statusbar tool to easily start and stop out beloved syncing tool, so i just wrote my own.
+
+## Signatures & Notarization
+
+Times are hard, macOS Catalina required to notarize macOS application. Since shell commands are used to start and stop syncthing, the application cannot be sandboxed and thus can't be notarized. 
 
 ## What is this?
 
@@ -30,7 +36,7 @@ Prefered way via brew cask:
 
 ## Requirements
 
-- [brew](https://brew.sh) (who doesn't use brew anymore?)
+- [brew](https://brew.sh) (who doesn't use brew anyhow?)
 - a brew syncthing installation: ```brew install syncthing```
 
 ## Caveats / not implemented yet
