@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, XMLParserDelegate, NSMenuDel
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         let barButton = barItem.button!
-        barButton.image = NSImage(named: NSImage.Name(rawValue: "syncthing-bar"))
+        barButton.image = NSImage(named: "syncthing-bar")
         
         let menu = NSMenu()
         menu.addItem(statusItem)
